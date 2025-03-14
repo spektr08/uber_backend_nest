@@ -1,5 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, UseGuards } from '@nestjs/common';
 import { DriverService } from './driver.service';
+import { AuthGuard } from 'src/auth/guard/auth.guard';
 
 @Controller('drivers')
 export class DriverController {
@@ -7,6 +8,7 @@ export class DriverController {
 
 
     @Get()
+    @UseGuards(AuthGuard)
     async getDrivers() {
         try {
         const drivers = await this.driverService.getDrivers();
